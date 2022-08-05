@@ -23,6 +23,7 @@ def create_task():
     form = addTask()
     task = Task(
         name=form.data['name'],
+        userId=current_user.id,
         description=form.data['description'],
         complete=form.data['complete'],
         section_id=form.data['section_id'],
@@ -31,5 +32,29 @@ def create_task():
         priority=form.data['priority']
     )
     db.session.add(task)
+    db.session.commit()
+    return task.to_dict()
+
+@task_routes.route('/<int:task_id>/', methods=['PUT'])
+@login_required
+def update_task(task_id):
+    task = Task.query.get(task_id)
+    print('TASK: ', task)
+    form = addTask()
+    task.name = form.data['name']
+    task.description = form.data['description']
+    task.complete = form.data['complete']
+    task.section_id = form.data['section_id']
+    task.project_id = form.data['project_id']
+    task.due = form.data['due']
+    task.priority = form.data['priority']
+    db.session.commit()
+    return task.to_dict()
+
+@task_routes.route('/<int:task_id>/', methods=['DELETE'])
+@login_required
+def delete_task(task_id):
+    task = Task.query.get(task_id)
+    db.session.delete(task)
     db.session.commit()
     return jsonify(task.to_dict())

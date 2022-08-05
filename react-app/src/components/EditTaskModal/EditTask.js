@@ -1,14 +1,14 @@
 import {useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createTask, getTasks } from '../../store/tasks'
+import { editTask, getTasks } from '../../store/tasks'
 
-function AddTask({setShowModal}) {
+function EditTask({task, setShowModal}) {
 
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [due, setDue] = useState('')
-    const [priority, setPriority] = useState(0)
+    const [name, setName] = useState(task?.name)
+    const [description, setDescription] = useState(task?.description)
+    const [due, setDue] = useState(task?.due)
+    const [priority, setPriority] = useState(task?.priority)
 
     const currentUser = useSelector(state => state.session.user)
     const dispatch = useDispatch()
@@ -17,18 +17,21 @@ function AddTask({setShowModal}) {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const task = {
+        const newTask = {
+            id: task.id,
             name,
             description,
+            // complete: false,
+            // section_id: task.section_id,
+            // project_id: task.project_id,
             due,
             priority,
-            user_id: currentUser.id
+            // user_id: currentUser.id
         }
-
-        dispatch(createTask(task)).then(() => {
+        console.log(newTask)
+        dispatch(editTask(newTask)).then(() => {
             dispatch(getTasks())
             setShowModal(false)
-            history.push('/app')
         })
     }
 
@@ -59,4 +62,4 @@ function AddTask({setShowModal}) {
     );
 }
 
-export default AddTask;
+export default EditTask;

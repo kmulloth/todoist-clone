@@ -12,41 +12,33 @@ const NavBar = ({setShowSidebar, showSidebar}) => {
   return (
     <nav>
       <ul id='navlist'>
-        <li>
-          <i class="fa-solid fa-bars" onClick={() => setShowSidebar(!showSidebar)}/>
-        </li>
-        <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
+        <li id='navbar-nav-buttons'>
+          <div >
+            <i className="fa-solid fa-bars" onClick={() => setShowSidebar(!showSidebar)}/>
+          </div>
+          <NavLink to={currentUser ?'/app':'/'} exact={true} activeClassName='active'>
             <i className='fas fa-home' />
           </NavLink>
         </li>
+        <li id='navbar-profile-buttons'>
         {!currentUser && (
         <>
-        <li>
           <NavLink to='/login' exact={true} activeClassName='active'>
             Login
           </NavLink>
-        </li>
-        <li>
           <NavLink to='/sign-up' exact={true} activeClassName='active'>
             Sign Up
           </NavLink>
-        </li>
         </>)}
-        <li>
-          <NavLink to='/users' exact={true} activeClassName='active'>
+          {/* <NavLink to='/users' exact={true} activeClassName='active'>
             Users
-          </NavLink>
-        </li>
+          </NavLink> */}
         {currentUser && (
         <>
-        <li>
           <AddTaskModal />
-        </li>
-        <li>
           <LogoutButton />
-        </li>
         </>)}
+        </li>
       </ul>
     </nav>
   );

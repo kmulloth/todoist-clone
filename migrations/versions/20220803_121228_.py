@@ -41,7 +41,7 @@ def upgrade():
     sa.Column('complete', sa.Boolean(), nullable=False),
     sa.Column('section_id', sa.Integer(), nullable=True),
     sa.Column('project_id', sa.Integer(), nullable=True),
-    sa.Column('due', sa.DateTime(), nullable=True),
+    sa.Column('due', sa.String(), nullable=True),
     sa.Column('priority', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['project_id'], ['projects.id'], ),
     sa.ForeignKeyConstraint(['section_id'], ['sections.id'], ),

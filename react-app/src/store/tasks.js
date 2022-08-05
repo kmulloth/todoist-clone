@@ -47,6 +47,31 @@ export const getTasks = () => async (dispatch) => {
     }
 }
 
+export const editTask = (task) => async (dispatch) => {
+    console.log("THUNK TASK: ", task)
+    const res = await fetch(`/api/tasks/${task.id}/`, {
+        method: "PUT",
+        body: JSON.stringify(task),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    // console.log('RES::', res.json())
+    if (res.ok) {
+        const newTask = await res.json()
+        console.log('NEW TASK: ', newTask)
+        dispatch(updateTask(newTask))
+    }
+}
+
+export const deleteTask = (id) => async (dispatch) => {
+    const res = await fetch(`/api/tasks/${id}/`, {
+        method: "DELETE"
+    })
+    if (res.ok) {
+        dispatch(removeTask(id))
+    }
+}
 
 const initialState = {}
 
@@ -63,6 +88,19 @@ const taskReducer = (state = initialState, action) => {
                     ...state, [action.payload.id]: action.payload
                 }
                 return newAddState
+
+            case EDIT_TASK:
+                const newEditState = {
+                    ...state, [action.payload.id]: action.payload
+                }
+                return newEditState
+
+            case DELETE_TASK:
+                const newDeleteState = {
+                    ...state
+                }
+                delete newDeleteState[action.payload]
+                return newDeleteState
 
             default:
                 return state
