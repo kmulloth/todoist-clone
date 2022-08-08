@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Task, Section, Project
+from app.models import db, Task, Project
 from app.forms.add_task import addTask
 
 task_routes = Blueprint('task_routes', __name__)
@@ -31,6 +31,7 @@ def create_task():
         due=form.data['due'],
         priority=form.data['priority']
     )
+    task.project = Project.query.get(task.project_id)
     db.session.add(task)
     db.session.commit()
     return task.to_dict()
@@ -48,6 +49,7 @@ def update_task(task_id):
     task.project_id = form.data['project_id']
     task.due = form.data['due']
     task.priority = form.data['priority']
+    task.project = Project.query.get(task.project_id)
     db.session.commit()
     return task.to_dict()
 

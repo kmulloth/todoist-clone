@@ -4,7 +4,6 @@ import {useSelector, } from 'react-redux';
 import LogoutButton from './auth/LogoutButton';
 import AddTaskModal from './AddTaskModal';
 
-
 const NavBar = ({setShowSidebar, showSidebar}) => {
 
   const currentUser = useSelector(state => state.session.user);

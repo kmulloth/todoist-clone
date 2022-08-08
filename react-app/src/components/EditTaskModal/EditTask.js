@@ -9,8 +9,10 @@ function EditTask({task, setShowModal}) {
     const [description, setDescription] = useState(task?.description)
     const [due, setDue] = useState(task?.due)
     const [priority, setPriority] = useState(task?.priority)
+    const [projectId, setProjectId] = useState(task?.project_id)
 
     const currentUser = useSelector(state => state.session.user)
+    const projects = useSelector(state => state.projects)
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -23,7 +25,7 @@ function EditTask({task, setShowModal}) {
             description,
             // complete: false,
             // section_id: task.section_id,
-            // project_id: task.project_id,
+            project_id: projectId,
             due,
             priority,
             // user_id: currentUser.id
@@ -54,6 +56,15 @@ function EditTask({task, setShowModal}) {
                     <option value={1}>Low</option>
                     <option value={2}>Medium</option>
                     <option value={3}>High</option>
+                </select>
+            </div>
+            <div className='form-group'>
+                <label htmlFor='project'>Project</label>
+                <select className='form-control' id='project' value={projectId} onChange={(e) => setProjectId(e.target.value)}>
+                    <option value={null}>None</option>
+                    {Object.values(projects).map(project => (
+                        <option value={project.id}>{project.name}</option>
+                    ))}
                 </select>
             </div>
             <button onClick={e => setShowModal(false)} className='cancel-btn'>Cancel</button>

@@ -9,8 +9,10 @@ function AddTask({setShowModal}) {
     const [description, setDescription] = useState('')
     const [due, setDue] = useState('')
     const [priority, setPriority] = useState(0)
+    const [projectId, setProjectId] = useState(null)
 
     const currentUser = useSelector(state => state.session.user)
+    const projects = useSelector(state => state.projects)
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -51,6 +53,15 @@ function AddTask({setShowModal}) {
                     <option value={1}>Low</option>
                     <option value={2}>Medium</option>
                     <option value={3}>High</option>
+                </select>
+            </div>
+            <div className='form-group'>
+                <label htmlFor='project'>Project</label>
+                <select className='form-control' id='project' value={projectId} onChange={(e) => setProjectId(e.target.value)}>
+                    <option value={null}>None</option>
+                    {Object.values(projects).map(project => (
+                        <option value={project.id}>{project.name}</option>
+                    ))}
                 </select>
             </div>
             <button onClick={e => setShowModal(false)} className='cancel-btn'>Cancel</button>

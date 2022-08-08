@@ -14,6 +14,7 @@ class Task(db.Model):
     priority = db.Column(db.Integer, nullable=True)
 
     user = db.relationship('User', back_populates='tasks')
+    project = db.relationship('Project', back_populates='tasks')
 
     def to_dict(self):
         return {

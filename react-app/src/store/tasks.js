@@ -48,7 +48,7 @@ export const getTasks = () => async (dispatch) => {
 }
 
 export const editTask = (task) => async (dispatch) => {
-    console.log("THUNK TASK: ", task)
+    // console.log("THUNK TASK: ", task)
     const res = await fetch(`/api/tasks/${task.id}/`, {
         method: "PUT",
         body: JSON.stringify(task),

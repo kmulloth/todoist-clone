@@ -4,17 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
+import Sidebar from './components/Sidebar';
 import Main from './components/Main';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
+import Inbox from './components/Inbox';
+import Project from './components/EachProject';
 
 function App() {
   const tasks = useSelector(state => state.tasks)
   const currentUser = useSelector(state => state.session.user)
   const [loaded, setLoaded] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true)
+  const [mainContent,setMainContent] = useState('today')
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,11 +49,20 @@ function App() {
           <User />
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          {/* <button onClick={() => console.log(tasks)} >PRINT TASKS</button> */}
+
         </Route>
-        <Route path='/app'>
-          <Main showSidebar={showSidebar}/>
+        <div id='main'>
+        <Route path='/app' >
+            {showSidebar  && <Sidebar setMainContent={setMainContent}/>}
+            {/* <Main mainContent={mainContent}/> */}
         </Route>
+        <Route path='/app/projects/:projectId'>
+            <Project />
+        </Route>
+        <Route path='/app/inbox'>
+          <Inbox />
+        </Route>
+        </div>
       </Switch>
     </BrowserRouter>
   );
