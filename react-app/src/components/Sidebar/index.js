@@ -6,11 +6,13 @@ import {getProjects} from '../../store/projects';
 
 function Sidebar({setMainContent}) {
 
+    const currentUser = useSelector(state => state.session.user);
     const projects = useSelector(state => state.projects);
+    const userProjects = Object.values(projects).filter(project => project.user_id === currentUser.id);
     const dispatch = useDispatch();
     useEffect(() => dispatch(getProjects()), [])
 
-    return (
+    return userProjects  &&(
         <div id='sidebar'>
             <ul id='side-menu'>
                 <NavLink to='/app/inbox' >Inbox</NavLink>
@@ -23,7 +25,7 @@ function Sidebar({setMainContent}) {
                     <AddProjectModal />
                 </div>
                 <div id='project-list'>
-                    {Object.values(projects).map(project => {
+                    {userProjects.map(project => {
                         return (
                             <NavLink to={`/app/projects/${project.id}`} className='project-item'>
                                 <h4>{project.name}</h4>

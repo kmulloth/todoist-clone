@@ -1,8 +1,30 @@
-#root {
+html {
     height: 100vh;
     width: 100vw;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+#main {
+    display: flex;
+    height: 97vh;
+}
+
+#sidebar {
+    width: 20em;
+    height: 100%;
+    background-color: #fafafa;
+    transition: all 0.5s;
 }
 
 body {
@@ -24,6 +46,7 @@ ul {
     justify-content: space-between;
     margin: 0;
     padding: 1rem 2rem;
+    height: 3vh;
     background-color: rgb(219,75,63);
 }
 

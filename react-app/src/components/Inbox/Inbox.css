@@ -1,0 +1,10 @@
+#all-tasks {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 70%;
+  overflow: scroll;
+  border: 1px solid #ccc;
+  margin: 0 1rem;
+  padding: 1rem;
+}

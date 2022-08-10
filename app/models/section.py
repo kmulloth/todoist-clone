@@ -7,6 +7,9 @@ class Section(db.Model):
     name = db.Column(db.String(40), nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
 
+    project = db.relationship('Project', back_populates='sections')
+    tasks = db.relationship('Task', back_populates='section')
+
     def to_dict(self):
         return {
             'id': self.id,

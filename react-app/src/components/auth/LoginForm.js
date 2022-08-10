@@ -10,6 +10,16 @@ const LoginForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+  const errorConverter = (err) => {
+    if (err === 'Email is not found.') {
+      return 'Email is incorrect.';
+    } else if (err === 'Email is required.') {
+      return 'Email/Username is required.'
+    } else {
+      return err
+    }
+  }
+
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
@@ -27,38 +37,40 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to='/app' />;
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type='submit'>Login</button>
-      </div>
-    </form>
+    <div className='login_form_div'>
+      <form onSubmit={onLogin} className='login_form'>
+        { errors.length > 0 && <div className='login_form_errors'>
+          {errors.map((error, ind) => (
+            <div key={ind} className='login_form_error'>{errorConverter(error)}</div>
+          ))}
+        </div> }
+        <div className='login_form_divs'>
+          <div className='sf_label'><label htmlFor='email'>Email</label></div>
+          <input
+            name='email'
+            type='text'
+            placeholder='Email'
+            value={email}
+            onChange={updateEmail}
+          />
+        </div>
+        <div className='login_form_divs'>
+          <div className='sf_label'><label htmlFor='email'>Password</label></div>
+          <input
+            name='password'
+            type='password'
+            placeholder='Password'
+            value={password}
+            onChange={updatePassword}
+          />
+        </div>
+        <button type='submit' className='login_form_divs sf_submit'>Login</button>
+      </form>
+    </div>
   );
 };
 

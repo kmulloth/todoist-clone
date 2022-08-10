@@ -3,20 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTasks } from "../../store/tasks";
 import EditTaskModal from "../EditTaskModal";
 import DeleteTaskModal from "../DeleteTaskModal";
+import './Inbox.css'
 
 function Inbox () {
 
+    const currentUser = useSelector(state => state.session.user);
+    const tasks = useSelector(state => state.tasks)
+    const userTasks = Object.values(tasks).filter(task => task.userId === currentUser.id);
     const dispatch = useDispatch()
-
     useEffect(() => dispatch(getTasks()), [])
 
-    const tasks = useSelector(state => state.tasks)
-
     return (
-        <>
+        <div id='inbox'>
         <h2>Inbox</h2>
         <ul id='all-tasks'>
-        {Object.values(tasks).map(task => {
+        {userTasks.map(task => {
             return (
                 <li className="inbox-task">
                     <h4>NAME: {task.name}</h4>
@@ -29,7 +30,7 @@ function Inbox () {
             )
         })}
         </ul>
-        </>
+        </div >
     )
 }
 

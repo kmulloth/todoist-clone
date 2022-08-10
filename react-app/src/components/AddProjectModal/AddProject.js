@@ -4,7 +4,6 @@ import { createProject, getProjects } from "../../store/projects";
 
 function AddProject({setShowModal}) {
 
-
     const [name, setName] = useState('')
     const [color, setColor] = useState('#db4b3f')
     const [type, setType] = useState('list')
@@ -33,6 +32,7 @@ function AddProject({setShowModal}) {
         <form onSubmit={handleSubmit}>
             <div className='input'>
                 <input type='text' placeholder="Name" className='form-control' id='name' value={name} onChange={(e) => setName(e.target.value)} />
+                {name.length < 1 ? <p className='error'>Name is required</p> : null}
             </div>
             <div className='input'>
                 <input type='color' placeholder='Color' className='form-control' id='color' value={color} onChange={(e) => setColor(e.target.value)} />
@@ -46,7 +46,7 @@ function AddProject({setShowModal}) {
                 </button>
             </div>
             <button onClick={e => setShowModal(false)} className='cancel-btn'>Cancel</button>
-            <button type='submit' className='btn btn-primary'>Submit</button>
+            <button disabled={name.length < 1} type='submit' className='btn btn-primary'>Submit</button>
         </form>
     );
 }

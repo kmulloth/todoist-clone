@@ -15,6 +15,7 @@ class Task(db.Model):
 
     user = db.relationship('User', back_populates='tasks')
     project = db.relationship('Project', back_populates='tasks')
+    section = db.relationship('Section', back_populates='tasks')
 
     def to_dict(self):
         return {
