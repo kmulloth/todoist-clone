@@ -1,12 +1,21 @@
 import React, {useState} from 'react';
-import {NavLink} from 'react-router-dom';
-import {useSelector, } from 'react-redux';
+import {NavLink, useHistory} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux';
 import LogoutButton from './auth/LogoutButton';
 import AddTaskModal from './AddTaskModal';
+import { loginDemo } from '../store/session';
 
 const NavBar = ({setShowSidebar, showSidebar}) => {
 
   const currentUser = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleDemo = () => {
+    dispatch(loginDemo()).then(
+      () => history.push('/app/inbox')
+    )
+  }
 
   return (
     <nav>
@@ -25,6 +34,7 @@ const NavBar = ({setShowSidebar, showSidebar}) => {
           <NavLink to='/login' exact={true} activeClassName='active'>
             Login
           </NavLink>
+          <button onClick={handleDemo}>Demo</button>
           <NavLink to='/sign-up' exact={true} activeClassName='active'>
             Sign Up
           </NavLink>
