@@ -10,11 +10,22 @@ function EditTask({task, setShowModal}) {
     const [due, setDue] = useState(task?.due)
     const [priority, setPriority] = useState(task?.priority)
     const [projectId, setProjectId] = useState(task?.project_id)
+    const [sectionId, setSectionId] = useState(task?.section_id)
 
     const currentUser = useSelector(state => state.session.user)
     const projects = useSelector(state => state.projects)
+    const sections = useSelector(state => state.sections)
     const dispatch = useDispatch()
     const history = useHistory()
+
+    const userProjects = Object.values(projects).map(project => {
+        if (project.user_id == currentUser.id){
+            const sectionsArr = Object.values(sections).filter(section => section.project_id == project.id)
+            return {id: project.id, name: project.name, sections: sectionsArr}
+        }
+    })
+
+    console.log('User Projects:', userProjects)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -24,7 +35,7 @@ function EditTask({task, setShowModal}) {
             name,
             description,
             // complete: false,
-            // section_id: task.section_id,
+            section_id: sectionId,
             project_id: projectId,
             due,
             priority,
@@ -35,6 +46,15 @@ function EditTask({task, setShowModal}) {
             dispatch(getTasks())
             setShowModal(false)
         })
+    }
+
+    const handleSectionSelect = (e) => {
+
+        const projectConfig = e.target.value.split(',')
+        console.log('Project:', projectConfig[0], 'incoming Section:', projectConfig[1],'old section:', sectionId)
+        setProjectId(projectConfig[0])
+        setSectionId(projectConfig[1])
+        // console.log(projectId, sectionId)
     }
 
     return (
@@ -60,10 +80,19 @@ function EditTask({task, setShowModal}) {
             </div>
             <div className='form-group'>
                 <label htmlFor='project'>Project</label>
-                <select className='form-control' id='project' value={projectId} onChange={(e) => setProjectId(e.target.value)}>
-                    <option value={null}>None</option>
-                    {Object.values(projects).map(project => (
-                        <option value={project.id}>{project.name}</option>
+                <select
+                className='form-control'
+                id='project'
+                value={[projectId, sectionId]}
+                onChange={(e) => handleSectionSelect(e)}>
+                    <option value={[null, null]}>None</option>
+                    {userProjects.map(project => (
+                        <>
+                        <option key={project.id} value={[project.id, null]}>{project.name}</option>
+                        {project.sections.length > 0 && project.sections.map(section => (
+                            <option value={[project.id, section.id]}>{section.name}</option>
+                        ))}
+                        </>
                     ))}
                 </select>
             </div>
