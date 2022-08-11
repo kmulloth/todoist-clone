@@ -9,9 +9,9 @@ class Project(db.Model):
     color = db.Column(db.String(11), nullable=False)
     type = db.Column(db.String(6), nullable=False)
 
-    user = db.relationship('User', back_populates='projects')
-    sections = db.relationship('Section', back_populates='project')
-    tasks = db.relationship('Task', back_populates='project')
+    users = db.relationship('User', back_populates='projects')
+    sections = db.relationship('Section', back_populates='projects')
+    tasks = db.relationship('Task', back_populates='projects')
 
     def to_dict(self):
         return {

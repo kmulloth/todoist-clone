@@ -30,7 +30,6 @@ function App() {
   if (!loaded) {
     return null;
   }
-
   return (
     <BrowserRouter>
       <NavBar setShowSidebar={setShowSidebar} showSidebar={showSidebar}/>

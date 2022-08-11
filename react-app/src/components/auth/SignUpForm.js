@@ -46,8 +46,11 @@ const SignUpForm = () => {
     e.preventDefault();
     setFirstSubmit(true);
 
-    if (errors.length == 0) {
-        dispatch(signUp(username, email, password));
+    if (!errors.length) {
+      const data = await dispatch(signUp(username, email, password));
+      if (data) {
+        setErrors(data)
+      }
     }
   };
 

@@ -10,14 +10,21 @@ function AddTask({setShowModal}) {
     const [description, setDescription] = useState('')
     const [due, setDue] = useState('')
     const [priority, setPriority] = useState(0)
-    const [projectId, setProjectId] = useState(0)
+    const [projectId, setProjectId] = useState()
+    const [sectionId, setSectionId] = useState()
 
     const currentUser = useSelector(state => state.session.user)
     const projects = useSelector(state => state.projects)
+    const sections = useSelector(state => state.sections)
     const dispatch = useDispatch()
     const history = useHistory()
 
-    useEffect(() => console.log('ProjectID:', projectId) , [projectId])
+    const userProjects = Object.values(projects).map(project => {
+        if (project.user_id == currentUser.id){
+            const sectionsArr = Object.values(sections).filter(section => section.project_id == project.id)
+            return {id: project.id, name: project.name, sections: sectionsArr}
+        }
+    })
 
     useEffect(() => {
         const tempErrors = [];
@@ -40,14 +47,24 @@ function AddTask({setShowModal}) {
             due,
             priority,
             project_id: projectId,
-            user_id: currentUser.id
+            section_id: sectionId,
+            userId: currentUser.id
         }
 
         dispatch(createTask(task)).then(() => {
             dispatch(getTasks())
             setShowModal(false)
-            history.push(projectId != 0 ? `/app/projects/${projectId}` : '/app/inbox')
+            history.push(projectId != null ? `/app/projects/${projectId}` : '/app/inbox')
         })
+    }
+
+    const handleSectionSelect = (e) => {
+
+        const projectConfig = e.target.value.split(',')
+        console.log('Project:', projectConfig[0], 'incoming Section:', projectConfig[1],'old section:', sectionId)
+        setProjectId(projectConfig[0])
+        setSectionId(projectConfig[1])
+        // console.log(projectId, sectionId)
     }
 
     return (
@@ -76,10 +93,19 @@ function AddTask({setShowModal}) {
             </div>
             <div className='form-group'>
                 <label htmlFor='project'>Project</label>
-                <select className='form-control' id='project' value={projectId} onChange={(e) => setProjectId(e.target.value)}>
-                    <option value={0}>None</option>
-                    {Object.values(projects).map(project => (
-                        <option value={project.id}>{project.name}</option>
+                <select
+                className='form-control'
+                id='project'
+                value={[projectId, sectionId]}
+                onChange={(e) => handleSectionSelect(e)}>
+                    <option value={[null, null]}>None</option>
+                    {userProjects.map(project => project && (
+                        <>
+                        <option key={project?.id} value={[project?.id, null]}>{project?.name}</option>
+                        {project.sections.length > 0 && project.sections.map(section => (
+                            <option value={[project?.id, section?.id]}>{section.name}</option>
+                        ))}
+                        </>
                     ))}
                 </select>
             </div>

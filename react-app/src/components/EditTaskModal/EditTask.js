@@ -25,8 +25,6 @@ function EditTask({task, setShowModal}) {
         }
     })
 
-    console.log('User Projects:', userProjects)
-
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -86,11 +84,11 @@ function EditTask({task, setShowModal}) {
                 value={[projectId, sectionId]}
                 onChange={(e) => handleSectionSelect(e)}>
                     <option value={[null, null]}>None</option>
-                    {userProjects.map(project => (
+                    {userProjects.map(project => project && (
                         <>
-                        <option key={project.id} value={[project.id, null]}>{project.name}</option>
+                        <option key={project?.id} value={[project?.id, null]}>{project?.name}</option>
                         {project.sections.length > 0 && project.sections.map(section => (
-                            <option value={[project.id, section.id]}>{section.name}</option>
+                            <option value={[project?.id, section?.id]}>{section.name}</option>
                         ))}
                         </>
                     ))}

@@ -13,9 +13,9 @@ class Task(db.Model):
     due = db.Column(db.String(50), nullable=True)
     priority = db.Column(db.Integer, nullable=True)
 
-    user = db.relationship('User', back_populates='tasks')
-    project = db.relationship('Project', back_populates='tasks')
-    section = db.relationship('Section', back_populates='tasks')
+    users = db.relationship('User', back_populates='tasks')
+    projects = db.relationship('Project', back_populates='tasks')
+    sections = db.relationship('Section', back_populates='tasks')
 
     def to_dict(self):
         return {
