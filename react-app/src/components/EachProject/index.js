@@ -58,7 +58,7 @@ function Project() {
                 })}
             </div>
             <div className='section-form'>
-                {!showAddSection && <button onClick={() => setShowAddSection(true)}>Add Section</button>}
+                {!showAddSection && <button className='add-section-buttons' onClick={() => setShowAddSection(true)}>Add Section</button>}
                 {showAddSection && <AddSection projectId={projectId} setShowAddSection={setShowAddSection}/>}
             </div>
             <div className="project-sections">

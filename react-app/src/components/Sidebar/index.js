@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import  { NavLink } from 'react-router-dom';
 import {getProjects} from '../../store/projects';
+import './Sidebar.css'
 
 function Sidebar({setMainContent}) {
 

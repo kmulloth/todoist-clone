@@ -1,0 +1,10 @@
+#projects {
+    padding: 0 0 0 40px;
+}
+
+#project-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1em 0 0;
+}
