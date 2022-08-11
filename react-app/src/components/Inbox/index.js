@@ -15,21 +15,21 @@ function Inbox () {
 
     return (
         <div id='inbox'>
-        <h2>Inbox</h2>
-        <ul id='all-tasks'>
-        {userTasks.map(task => {
-            return (
-                <li className="inbox-task">
-                    <h4>NAME: {task.name}</h4>
-                    <p>DESCRIPTION: {task.description}</p>
-                    <p>DUE: {task.due}</p>
-                    <p>PRIORITY: {task.priority}</p>
-                    <EditTaskModal task={task} />
-                    <DeleteTaskModal task={task} />
-                </li>
-            )
-        })}
-        </ul>
+            <h2>Inbox</h2>
+            <ul id='all-tasks'>
+            {userTasks.map(task => {
+                return (
+                    <li className="inbox-task">
+                        <h4>NAME: {task.name}</h4>
+                        <p>DESCRIPTION: {task.description}</p>
+                        <p>DUE: {task.due}</p>
+                        <p>PRIORITY: {task.priority}</p>
+                        <EditTaskModal task={task} />
+                        <DeleteTaskModal task={task} />
+                    </li>
+                )
+            })}
+            </ul>
         </div >
     )
 }

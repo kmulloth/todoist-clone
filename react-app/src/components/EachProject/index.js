@@ -8,7 +8,9 @@ import DeleteProjectModal from "../DeleteProjectModal";
 import EditProjectModal from "../EditProjectModal";
 import EditTaskModal from "../EditTaskModal";
 import DeleteTaskModal from "../DeleteTaskModal";
+import DeleteSectionModal from "../DeleteSectionModal";
 import AddSection from "../AddSection";
+import './EachProject.css'
 
 function Project() {
 
@@ -32,47 +34,55 @@ function Project() {
     }, [dispatch]);
 
     return (
-        <div>
+        <div className='project'>
             <div className="project-header">
                 <h1>{project?.name}</h1>
-                <p>{project?.description}</p>
+                <div>
                 <EditProjectModal project={project}/>
                 <DeleteProjectModal project={project}/>
             </div>
-            <div className='section-form'>
-                <button onClick={() => setShowAddSection(true)}>Add Section</button>
-                {showAddSection && <AddSection projectId={projectId} setShowAddSection={setShowAddSection}/>}
             </div>
             <div className="project-tasks">
                 {projectTasks.map(task => {
                     if (task.section_id == null) {
                         return (
                             <div key={task.id} className="task">
-                                <h3>{task.name}</h3>
-                                <p>{task.description}</p>
+                                <p>{task.name}</p>
+                                <div>
                                 <EditTaskModal task={task}/>
                                 <DeleteTaskModal task={task}/>
+                            </div>
                             </div>
                         )
                     }
                 })}
             </div>
+            <div className='section-form'>
+                {!showAddSection && <button onClick={() => setShowAddSection(true)}>Add Section</button>}
+                {showAddSection && <AddSection projectId={projectId} setShowAddSection={setShowAddSection}/>}
+            </div>
             <div className="project-sections">
                 {projectSections.map(section => (
                     <div className='section'>
-                        <h4>{section.name}</h4>
+                        <div className="section-header">
+                            <h3>{section.name}</h3>
+                            <DeleteSectionModal section={section} />
+                        </div>
+                        <div className="section-tasks">
                         {projectTasks.map(task => {
                             if (task.section_id == section.id) {
                                 return (
                                     <div key={task.id} className="task">
-                                        <h3>{task.name}</h3>
-                                        <p>{task.description}</p>
+                                        <p>{task.name}</p>
+                                        <div>
                                         <EditTaskModal task={task}/>
                                         <DeleteTaskModal task={task}/>
+                                    </div>
                                     </div>
                                 )
                             }
                         })}
+                        </div>
                     </div>
                 ))}
             </div>
