@@ -7,6 +7,7 @@ import { loginDemo } from '../store/session';
 
 const NavBar = ({setShowSidebar, showSidebar}) => {
 
+  const [profileMenu, setProfileMenu] = useState(false);
   const currentUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -19,15 +20,15 @@ const NavBar = ({setShowSidebar, showSidebar}) => {
 
   return (
     <nav>
-      <ul id='navlist'>
-        <li id='navbar-nav-buttons'>
+      <ul id={`navlist${!currentUser ? '-splash': ''}`}>
+      {currentUser &&<li id='navbar-nav-buttons'>
           <div >
             <i className="fa-solid fa-bars" onClick={() => setShowSidebar(!showSidebar)}/>
           </div>
-          <NavLink to={currentUser ?'/app':'/'} exact={true} activeClassName='active'>
+          <NavLink to={currentUser ?'/app/today':'/'} exact={true} activeClassName='active'>
             <i className='fas fa-home' />
           </NavLink>
-        </li>
+        </li>}
         <li id='navbar-profile-buttons'>
         {!currentUser && (
         <>
@@ -43,9 +44,10 @@ const NavBar = ({setShowSidebar, showSidebar}) => {
             Users
           </NavLink> */}
         {currentUser && (
-        <>
+          <>
           <AddTaskModal />
-          <LogoutButton />
+          <i className="fa-solid fa-user" onClick={() => setProfileMenu(!profileMenu)}/>
+          {profileMenu && <LogoutButton setProfileMenu={setProfileMenu}/>}
         </>)}
         </li>
       </ul>

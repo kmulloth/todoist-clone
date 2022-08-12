@@ -24,6 +24,7 @@ const removeTask = (id) => ({
 })
 
 export const createTask = (task) => async (dispatch) => {
+    console.log('createTask', task)
     const res = await fetch("/api/tasks/", {
         method: "POST",
         body: JSON.stringify(task),
@@ -31,8 +32,10 @@ export const createTask = (task) => async (dispatch) => {
             "Content-Type": "application/json"
         }
     })
+    console.log('res', JSON.stringify(task))
     if (res.ok) {
         const task = await res.json()
+        console.log('task', task)
         dispatch(addTask(task))
         return 'Task Added'
     }

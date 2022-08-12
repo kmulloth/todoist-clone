@@ -38,6 +38,8 @@ function AddTask({setShowModal}) {
         setErrors(tempErrors);
     } , [name, description, due]);
 
+    useEffect(() => console.log(due), [due])
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -50,6 +52,8 @@ function AddTask({setShowModal}) {
             section_id: sectionId,
             userId: currentUser.id
         }
+
+        console.log(due, task)
 
         dispatch(createTask(task)).then(() => {
             setShowModal(false)

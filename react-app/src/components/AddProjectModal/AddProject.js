@@ -45,7 +45,7 @@ function AddProject({setShowModal}) {
         <form onSubmit={handleSubmit}>
             <div className='input'>
                 <input type='text' placeholder="Name" className='form-control' id='name' value={name} onChange={(e) => setName(e.target.value)} />
-                {name.length < 1 ? <p className='error'>Name is required</p> : null}
+                {name.replace(/\s+/g, '').length < 1 ? <p className='error'>Name is required</p> : null}
             </div>
             <div className='input'>
                 <select placeholder='Color' className='form-control' id='color' value={color} onChange={(e) => setColor(e.target.value)} >

@@ -9,8 +9,10 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
+import Splash from './components/Splash';
 import Inbox from './components/Inbox';
 import Project from './components/EachProject';
+import Archive from './components/Archive';
 
 function App() {
   const tasks = useSelector(state => state.tasks)
@@ -34,6 +36,9 @@ function App() {
     <BrowserRouter>
       <NavBar setShowSidebar={setShowSidebar} showSidebar={showSidebar}/>
       <Switch>
+        <Route path='/' exact={true}>
+          <Splash />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
@@ -59,6 +64,12 @@ function App() {
         </Route>
         <Route path='/app/inbox'>
           <Inbox />
+        </Route>
+        <Route path='/app/today'>
+          <h1>today</h1>
+        </Route>
+        <Route path='/app/archive'>
+          <Archive />
         </Route>
         </div>
       </Switch>

@@ -37,7 +37,7 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/app/inbox' />;
+    return <Redirect to='/app/today' />;
   }
 
   return (

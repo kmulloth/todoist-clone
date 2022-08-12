@@ -33,10 +33,10 @@ function EditProject({setShowModal, project}) {
     return (
         <form onSubmit={handleSubmit}>
             <div className='input'>
-                <input type='text' placeholder="Name" className='form-control' id='name' value={name} onChange={(e) => setName(e.target.value)} />
+                <input type='text' placeholder="Name" className='form-control' id='name' value={name} onChange={(e) => setName(e.target.value)} required/>
             </div>
             <div className='input'>
-                <input type='color' placeholder='Color' className='form-control' id='color' value={color} onChange={(e) => setColor(e.target.value)} />
+                <input type='color' placeholder='Color' className='form-control' id='color' value={color} onChange={(e) => setColor(e.target.value)} required/>
             </div>
             <div className='input' id='project-type-selct'>
                 <button id='project-type-list' className='project-type-list' onClick={() => {setType('list')}}>

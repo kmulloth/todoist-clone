@@ -16,9 +16,9 @@ function Sidebar({setMainContent}) {
     return userProjects  &&(
         <div id='sidebar'>
             <ul id='side-menu'>
-                <NavLink to='/app/inbox' >Inbox</NavLink>
-                <li onClick={() => setMainContent('today')}>today</li>
-                <li onClick={() => setMainContent('schedule')}>schedule</li>
+                <li><NavLink to='/app/inbox'>Inbox</NavLink></li>
+                <li><NavLink to='/app/today' >Today</NavLink></li>
+                {/* <li onClick={() => setMainContent('schedule')}>schedule</li> */}
             </ul>
             <div id='projects'>
                 <div id='project-header'>
@@ -34,6 +34,9 @@ function Sidebar({setMainContent}) {
                         )
                     })}
                 </div>
+            </div>
+            <div id='archive'>
+                <NavLink to='/app/archive'>Archive</NavLink>
             </div>
         </div>
     )

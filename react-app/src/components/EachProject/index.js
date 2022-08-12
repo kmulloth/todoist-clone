@@ -10,6 +10,7 @@ import EditTaskModal from "../EditTaskModal";
 import DeleteTaskModal from "../DeleteTaskModal";
 import DeleteSectionModal from "../DeleteSectionModal";
 import AddSection from "../AddSection";
+import Task from "../Task";
 import './EachProject.css'
 
 function Project() {
@@ -44,16 +45,8 @@ function Project() {
             </div>
             <div className="project-tasks">
                 {projectTasks.map(task => {
-                    if (task.section_id == null) {
-                        return (
-                            <div key={task.id} className="task">
-                                <p>{task.name}</p>
-                                <div>
-                                <EditTaskModal task={task}/>
-                                <DeleteTaskModal task={task}/>
-                            </div>
-                            </div>
-                        )
+                    if (task.section_id == null && task.complete === false) {
+                        return <Task task={task} />
                     }
                 })}
             </div>
@@ -70,16 +63,8 @@ function Project() {
                         </div>
                         <div className="section-tasks">
                         {projectTasks.map(task => {
-                            if (task.section_id == section.id) {
-                                return (
-                                    <div key={task.id} className="task">
-                                        <p>{task.name}</p>
-                                        <div>
-                                        <EditTaskModal task={task}/>
-                                        <DeleteTaskModal task={task}/>
-                                    </div>
-                                    </div>
-                                )
+                            if (task.section_id == section.id && task.complete === false) {
+                                return <Task task={task} />
                             }
                         })}
                         </div>

@@ -8,3 +8,11 @@
     justify-content: space-between;
     padding: 0 1em 0 0;
 }
+
+#archive {
+    display: flex;
+    align-items: center;
+    padding: 1em 0;
+    margin: 0 1em 0 40px;
+    border-top: 1px solid #ddd;
+}

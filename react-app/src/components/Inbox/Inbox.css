@@ -16,3 +16,16 @@
   margin: 0 1rem;
   padding: 1rem;
 }
+
+.inbox-task{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.inbox-task-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
