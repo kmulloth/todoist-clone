@@ -11,6 +11,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Splash from './components/Splash';
 import Inbox from './components/Inbox';
+import Today from './components/Today';
 import Project from './components/EachProject';
 import Archive from './components/Archive';
 
@@ -66,7 +67,7 @@ function App() {
           <Inbox />
         </Route>
         <Route path='/app/today'>
-          <h1>today</h1>
+          <Today />
         </Route>
         <Route path='/app/archive'>
           <Archive />

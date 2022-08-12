@@ -40,8 +40,8 @@ def create_task():
 @login_required
 def update_task(task_id):
     task = Task.query.get(task_id)
-    print('TASK: ', task)
     form = addTask()
+    
     task.name = form.data['name']
     task.description = form.data['description']
     task.complete = form.data['complete']

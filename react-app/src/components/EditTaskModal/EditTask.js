@@ -1,22 +1,24 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { editTask, getTasks } from '../../store/tasks'
 
 function EditTask({task, setShowModal}) {
-    console.log(task)
+
+    const [errors, setErrors] = useState([]);
     const [name, setName] = useState(task?.name)
     const [description, setDescription] = useState(task?.description)
-    const [due, setDue] = useState(task?.due )
+    const [due, setDue] = useState(task?.due)
     const [priority, setPriority] = useState(task?.priority)
-    const [projectId, setProjectId] = useState(task?.project_id)
-    const [sectionId, setSectionId] = useState(task?.section_id)
+    const [projectId, setProjectId] = useState(task?.project_id )
+    const [sectionId, setSectionId] = useState(task?.section_id )
 
     const currentUser = useSelector(state => state.session.user)
     const projects = useSelector(state => state.projects)
     const sections = useSelector(state => state.sections)
     const dispatch = useDispatch()
     const history = useHistory()
+    const today = new Date()
 
     const userProjects = Object.values(projects).map(project => {
         if (project.user_id == currentUser.id){
@@ -25,19 +27,40 @@ function EditTask({task, setShowModal}) {
         }
     })
 
+    useEffect(() => {
+        console.log(due, new Date(due), '!!!' , new Date(today), new Date(due) < new Date(today))
+        const tempErrors = [];
+
+        if (name.length < 1) tempErrors.push('Name is required');
+        if (name.length > 50) tempErrors.push('Name must be less than 50 characters');
+        if (description.length < 1) tempErrors.push('Please add a brief description');
+        if (description.length > 500) tempErrors.push('Description must be less than 500 characters');
+        if (!due) tempErrors.push('Please add a due date');
+        if (new Date(due) < new Date(today)) tempErrors.push('Due date must be in the future');
+
+        setErrors(tempErrors);
+    } , [name, description, due]);
+
+    useEffect(() => console.log(due), [due])
+
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        const trueNull = (val) => {
+            if( val != null) return val;
+            return
+        }
 
         const newTask = {
             id: task.id,
             name,
             description,
             // complete: false,
-            section_id: sectionId,
-            project_id: projectId,
             due,
             priority,
-            // user_id: currentUser.id
+            project_id: trueNull(projectId),
+            section_id: trueNull(sectionId),
+            userId: currentUser.id
         }
         console.log(newTask)
         dispatch(editTask(newTask)).then(() => {
@@ -58,6 +81,9 @@ function EditTask({task, setShowModal}) {
 
     return (
         <form onSubmit={handleSubmit}>
+            <ul className="errors">
+                {errors.map(error => <li className='error' key={error}>{error}</li>)}
+            </ul>
             <div className='form-group'>
                 <input
                 type='text'
@@ -105,10 +131,10 @@ function EditTask({task, setShowModal}) {
                 id='project'
                 value={[projectId, sectionId]}
                 onChange={(e) => handleSectionSelect(e)}>
-                    <option value={[null, null]}>None</option>
+                    <option value={[null,null]}>None</option>
                     {userProjects.map(project => project && (
                         <>
-                        <option key={project?.id} value={[project?.id, null]}>{project?.name}</option>
+                        <option key={project?.id} value={[project?.id,null]}>{project?.name}</option>
                         {project.sections.length > 0 && project.sections.map(section => (
                             <option value={[project?.id, section?.id]}>{section.name}</option>
                         ))}
@@ -117,7 +143,7 @@ function EditTask({task, setShowModal}) {
                 </select>
             </div>
             <button onClick={e => setShowModal(false)} className='cancel-btn'>Cancel</button>
-            <button type='submit' className='btn btn-primary'>Submit</button>
+            <button type='submit' disabled={errors.length > 0} className='btn btn-primary'>Submit</button>
         </form>
     );
 }
