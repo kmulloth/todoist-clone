@@ -10,7 +10,7 @@ class Project(db.Model):
     type = db.Column(db.String(6), nullable=False)
 
     users = db.relationship('User', back_populates='projects')
-    sections = db.relationship('Section', back_populates='projects')
+    sections = db.relationship('Section', back_populates='projects', cascade='all, delete-orphan')
     tasks = db.relationship('Task', back_populates='projects')
 
     def to_dict(self):
