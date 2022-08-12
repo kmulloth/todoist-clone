@@ -28,7 +28,7 @@ function EditTask({task, setShowModal}) {
     })
 
     useEffect(() => {
-        console.log(due, new Date(due), '!!!' , new Date(today), new Date(due) < new Date(today))
+        // console.log(due, new Date(due), '!!!' , new Date(today), new Date(due) < new Date(today))
         const tempErrors = [];
 
         if (name.length < 1) tempErrors.push('Name is required');

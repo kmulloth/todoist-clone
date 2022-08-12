@@ -28,7 +28,7 @@ function AddTask({setShowModal}) {
     })
 
     useEffect(() => {
-        console.log(Date(due), '!!!' , Date(today), Date(due) < Date(today))
+        // console.log(Date(due), '!!!' , Date(today), Date(due) < Date(today))
         const tempErrors = [];
 
         if (name.length < 1) tempErrors.push('Name is required');
@@ -36,7 +36,7 @@ function AddTask({setShowModal}) {
         if (description.length < 1) tempErrors.push('Please add a brief description');
         if (description.length > 500) tempErrors.push('Description must be less than 500 characters');
         if (!due) tempErrors.push('Please add a due date');
-        if (Date(due) < Date(today)) tempErrors.push('Due date must be in the future');
+        if (new Date(due) < new Date(today)) tempErrors.push('Due date must be in the future');
 
         setErrors(tempErrors);
     } , [name, description, due]);
