@@ -61,7 +61,7 @@ function AddProject({setShowModal}) {
                 </button>
             </div>
             <button onClick={e => setShowModal(false)} className='cancel-btn'>Cancel</button>
-            <button disabled={name.length < 1} type='submit' className='btn btn-primary'>Submit</button>
+            <button disabled={name.replace(/\s+/g, '').length < 1} type='submit' className='btn btn-primary'>Submit</button>
         </form>
     );
 }
