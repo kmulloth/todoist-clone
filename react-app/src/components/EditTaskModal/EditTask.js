@@ -43,6 +43,7 @@ function EditTask({task, setShowModal}) {
         dispatch(editTask(newTask)).then(() => {
             dispatch(getTasks())
             setShowModal(false)
+            history.push(projectId != null ? `/app/projects/${projectId}` : '/app/inbox')
         })
     }
 

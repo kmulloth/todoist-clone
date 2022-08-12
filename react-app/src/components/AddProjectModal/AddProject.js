@@ -5,11 +5,24 @@ import { createProject, getProjects } from "../../store/projects";
 function AddProject({setShowModal}) {
 
     const [name, setName] = useState('')
-    const [color, setColor] = useState('#db4b3f')
+    const [color, setColor] = useState('#696969')
     const [type, setType] = useState('list')
 
     const currentUser = useSelector(state => state.session.user)
     const dispatch = useDispatch()
+
+    const colors = [
+        { name: 'Charcoal', value: '#686868' },
+        { name: 'Red', value: '#db4b3f' },
+        { name: 'Orange', value: '#f9a825' },
+        { name: 'Yellow', value: '#f9e821' },
+        { name: 'Green', value: '#b0d851' },
+        { name: 'Blue', value: '#4b9dd8' },
+        { name: 'Purple', value: '#8f8fd8' },
+        { name: 'Pink', value: '#f9c0c5' },
+        { name: 'Black', value: '#000000' },
+        { name: 'White', value: '#ffffff' },
+    ]
 
     const handleSubmit = (e) => {
 
@@ -35,7 +48,9 @@ function AddProject({setShowModal}) {
                 {name.length < 1 ? <p className='error'>Name is required</p> : null}
             </div>
             <div className='input'>
-                <input type='color' placeholder='Color' className='form-control' id='color' value={color} onChange={(e) => setColor(e.target.value)} />
+                <select placeholder='Color' className='form-control' id='color' value={color} onChange={(e) => setColor(e.target.value)} >
+                    {colors.map(color => <option key={color.name} value={color.value}>{color.name}</option>)}
+                </select>
             </div>
             <div className='input' id='project-type-selct'>
                 <button id='project-type-list' className='project-type-list' onClick={() => {setType('list')}}>

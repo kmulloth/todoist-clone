@@ -7,8 +7,10 @@ function DeleteTask ({task, setShowModal}) {
 
     const handleSubmit = e => {
         e.preventDefault()
-        dispatch(deleteTask(task.id))
-        setShowModal(false)
+        dispatch(deleteTask(task.id)).then(() => {
+            dispatch(getTasks())
+            setShowModal(false)
+        })
     }
 
     return (

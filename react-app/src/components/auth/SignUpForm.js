@@ -75,7 +75,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/app' />;
+    return <Redirect to='/app/inbox' />;
   }
 
   return (

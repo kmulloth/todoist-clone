@@ -52,9 +52,9 @@ function AddTask({setShowModal}) {
         }
 
         dispatch(createTask(task)).then(() => {
-            dispatch(getTasks())
             setShowModal(false)
             history.push(projectId != null ? `/app/projects/${projectId}` : '/app/inbox')
+            dispatch(getTasks())
         })
     }
 
