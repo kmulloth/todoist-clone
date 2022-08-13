@@ -7,7 +7,7 @@ import DeleteTaskModal from "../DeleteTaskModal";
 function  Task ({task}) {
 
     const today = new Date();
-    const dueDate = new Date(task.due);
+    const dueDate = new Date(new Date(task.due).setDate(new Date(task.due).getDate() + 1));
 
     const overdue = dueDate < today ;
 
@@ -44,7 +44,7 @@ function  Task ({task}) {
                 <input type="checkbox"checked={task.complete} value={task.complete} id={task.id} onChange={handleComplete} />
                 <div className="inbox-task-header">
                     <h4>{task.name}</h4>
-                    <p>{new Date(task.due).toDateString()}</p>
+                    <p>{new Date(new Date(task.due).setDate(new Date(task.due).getDate() + 1)).toLocaleDateString()}</p>
                 </div>
             </div>
             <div className="inbox-task-buttons">

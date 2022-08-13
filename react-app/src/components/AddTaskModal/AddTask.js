@@ -18,7 +18,8 @@ function AddTask({setShowModal}) {
     const sections = useSelector(state => state.sections)
     const dispatch = useDispatch()
     const history = useHistory()
-    const today = new Date()
+
+    const trueDue = new Date(new Date(due).setDate(new Date(due).getDate() + 1))
 
     const userProjects = Object.values(projects).map(project => {
         if (project.user_id == currentUser.id){
@@ -28,7 +29,7 @@ function AddTask({setShowModal}) {
     })
 
     useEffect(() => {
-        // console.log(Date(due), '!!!' , Date(today), Date(due) < Date(today))
+        console.log(new Date(due), '!!!' ,new  Date(), trueDue < new Date())
         const tempErrors = [];
 
         if (name.length < 1) tempErrors.push('Name is required');
@@ -36,12 +37,14 @@ function AddTask({setShowModal}) {
         if (description.length < 1) tempErrors.push('Please add a brief description');
         if (description.length > 500) tempErrors.push('Description must be less than 500 characters');
         if (!due) tempErrors.push('Please add a due date');
-        if (new Date(due) < new Date(today)) tempErrors.push('Due date must be in the future');
+        if (!(trueDue >= new Date())) tempErrors.push('Due date must be in the future');
 
         setErrors(tempErrors);
     } , [name, description, due]);
 
-    useEffect(() => console.log(due), [due])
+    useEffect(() => {
+        console.log(trueDue)
+    }, [due])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -63,7 +66,7 @@ function AddTask({setShowModal}) {
 
         dispatch(createTask(task)).then(() => {
             setShowModal(false)
-            history.push(projectId != null ? `/app/projects/${projectId}` : '/app/inbox')
+            history.push(projectId ? `/app/projects/${projectId}` : '/app/inbox')
             dispatch(getTasks())
         })
     }
