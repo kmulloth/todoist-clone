@@ -11,7 +11,7 @@ function  Task ({task}) {
 
     const overdue = dueDate < today ;
 
-    console.log(today, dueDate, overdue)
+    // console.log(today, dueDate, overdue)
 
     const currentUser = useSelector(state => state.session.user);
     const tasks = useSelector(state => state.tasks)

@@ -20,9 +20,10 @@ function Today () {
             <h2>Today</h2>
             <ul id='all-tasks'>
             {userTasks.map(task => {
-                console.log(Date(task?.due), '!!!' , Date(today), Date(task.due) === Date(today))
-                return Date(task.due) == Date(today) && <Task task={task} />
-            }).sort((a, b) => a.due > b.due)}
+                const trueDue = new Date(new Date(task?.due).setDate(new Date(task?.due).getDate() + 1));
+                return trueDue.getDate() === today.getDate() && <Task task={task} />
+
+            })}
             </ul>
         </div >
     );
