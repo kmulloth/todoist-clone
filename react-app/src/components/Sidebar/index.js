@@ -29,6 +29,7 @@ function Sidebar({setMainContent}) {
                     {userProjects.map(project => {
                         return (
                             <NavLink to={`/app/projects/${project.id}`} className='project-item'>
+                                <span className='bubble' style={{color: project.color}}>&bull;</span>
                                 <h4>{project.name}</h4>
                             </NavLink>
                         )
