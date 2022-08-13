@@ -135,9 +135,9 @@ function EditTask({task, setShowModal}) {
                     <option value={[null,null]}>None</option>
                     {userProjects.map(project => project && (
                         <>
-                        <option className='project-ddli'key={project?.id} value={[project?.id,null]}>{project?.name}</option>
+                        <option className='project-ddli'key={project?.id} value={[project?.id,null]}>{project?.name.toUpperCase()}</option>
                         {project.sections.length > 0 && project.sections.map(section => (
-                            <option className='section-ddli' value={[project?.id, section?.id]}>{section.name}</option>
+                            <option className='section-ddli' value={[project?.id, section?.id]}>{section.name.toLowerCase()}</option>
                         ))}
                         </>
                     ))}

@@ -11,10 +11,11 @@
   margin: 0;
   padding: 0;
   width: 50%;
-  height: 70%;
+  height: 80%;
   overflow: scroll;
   margin: 0 1rem;
   padding: 1rem;
+  border-bottom: 1px solid #ddd;
 }
 
 .inbox-task{
