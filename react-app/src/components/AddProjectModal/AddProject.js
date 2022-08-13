@@ -52,14 +52,14 @@ function AddProject({setShowModal}) {
                     {colors.map(color => <option key={color.name} value={color.value}>{color.name}</option>)}
                 </select>
             </div>
-            <div className='input' id='project-type-selct'>
+            {/* <div className='input' id='project-type-selct'>
                 <button id='project-type-list' className='project-type-list' onClick={() => {setType('list')}}>
                     <i className="fa fa-list" />
                 </button>
                 <button id='project-type-board' className='project-type-board' onClick={() => {setType('board')}}>
                     <i className="fa fa-th-large" />
                 </button>
-            </div>
+            </div> */}
             <button onClick={e => setShowModal(false)} className='cancel-btn'>Cancel</button>
             <button disabled={name.replace(/\s+/g, '').length < 1} type='submit' className='btn btn-primary'>Submit</button>
         </form>

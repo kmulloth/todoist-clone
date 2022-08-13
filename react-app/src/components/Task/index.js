@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getTasks, editTask } from "../../store/tasks";
+import { Modal } from '../../context/Modal';
+import TaskDisplay from './TaskDisplay';
 import EditTaskModal from "../EditTaskModal";
 import DeleteTaskModal from "../DeleteTaskModal";
 
@@ -9,7 +11,7 @@ function  Task ({task}) {
     const today = new Date();
     const dueDate = new Date(new Date(task.due).setDate(new Date(task.due).getDate() + 1));
 
-    const overdue = dueDate < today ;
+    const [showModal, setShowModal] = useState(false);
 
     // console.log(today, dueDate, overdue)
 
@@ -39,7 +41,8 @@ function  Task ({task}) {
     }
 
     return (
-        <li className="inbox-task">
+        <>
+        <li className="inbox-task" onClick={() => setShowModal(true)}>
             <div className="inbox-task-title">
                 <input type="checkbox"checked={task.complete} value={task.complete} id={task.id} onChange={handleComplete} />
                 <div className="inbox-task-header">
@@ -52,6 +55,12 @@ function  Task ({task}) {
                 <DeleteTaskModal task={task} />
             </div>
         </li>
+        {showModal && (
+            <Modal onClose={() => setShowModal(false)}>
+                <TaskDisplay task={task} setShowModal={setShowModal}/>
+            </Modal>
+        )}
+        </>
     )
 
 }

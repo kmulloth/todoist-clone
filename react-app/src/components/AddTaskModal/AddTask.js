@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { createTask, getTasks } from '../../store/tasks'
+import './AddTask.css'
 
 function AddTask({setShowModal}) {
 
@@ -104,7 +105,7 @@ function AddTask({setShowModal}) {
                     <option value={3}>High</option>
                 </select>
             </div>
-            <div className='form-group'>
+            <div className='form-group' id='project-select'>
                 <label htmlFor='project'>Project</label>
                 <select
                 className='form-control'
@@ -114,9 +115,9 @@ function AddTask({setShowModal}) {
                     <option value={[null, null]}>None</option>
                     {userProjects.map(project => project && (
                         <>
-                        <option key={project?.id} value={[project?.id, null]}>{project?.name}</option>
+                        <option className='project-ddli' key={project?.id} value={[project?.id, null]}>{project?.name.toUpperCase()}</option>
                         {project.sections.length > 0 && project.sections.map(section => (
-                            <option value={[project?.id, section?.id]}>{section.name}</option>
+                            <option className='section-ddli' value={[project?.id, section?.id]}>{`\t ${section.name.toLowerCase()}`}</option>
                         ))}
                         </>
                     ))}

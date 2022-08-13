@@ -1,0 +1,17 @@
+#project-select {
+  width: 100%;
+  position: relative;
+}
+
+#project-selct select {
+    
+}
+
+.project-ddli {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.section-ddli {
+    font-size: 0.8em;
+}

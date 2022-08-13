@@ -125,7 +125,7 @@ function EditTask({task, setShowModal}) {
                     <option value={3}>High</option>
                 </select>
             </div>
-            <div className='form-group'>
+            <div className='form-group' id='project-select'>
                 <label htmlFor='project'>Project</label>
                 <select
                 className='form-control'
@@ -135,9 +135,9 @@ function EditTask({task, setShowModal}) {
                     <option value={[null,null]}>None</option>
                     {userProjects.map(project => project && (
                         <>
-                        <option key={project?.id} value={[project?.id,null]}>{project?.name}</option>
+                        <option className='project-ddli'key={project?.id} value={[project?.id,null]}>{project?.name}</option>
                         {project.sections.length > 0 && project.sections.map(section => (
-                            <option value={[project?.id, section?.id]}>{section.name}</option>
+                            <option className='section-ddli' value={[project?.id, section?.id]}>{section.name}</option>
                         ))}
                         </>
                     ))}
