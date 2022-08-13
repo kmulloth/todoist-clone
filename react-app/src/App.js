@@ -52,13 +52,9 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <Route path='/' exact={true} >
-
-        </Route>
         <div id='main'>
         <Route path='/app' >
             {showSidebar  && <Sidebar setMainContent={setMainContent}/>}
-            {/* <Main mainContent={mainContent}/> */}
         </Route>
         <Route path='/app/projects/:projectId'>
             <Project />

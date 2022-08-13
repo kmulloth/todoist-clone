@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {useParams} from 'react-router-dom';
+import {NavLink, useParams} from 'react-router-dom';
 import { getTasks } from "../../store/tasks";
 import { getProjects } from "../../store/projects";
 import { getSections } from "../../store/sections";
@@ -34,6 +34,9 @@ function Project() {
         dispatch(getSections())
     }, [dispatch]);
 
+    if (!project) {
+        return <NavLink to='/app/inbox' > Invalid URL Click here to return to inbox</NavLink>;
+    }
     return (
         <div className='project'>
             <div className="project-header">

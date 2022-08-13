@@ -33,9 +33,9 @@ function AddTask({setShowModal}) {
         console.log(new Date(due), '!!!' ,new  Date(), trueDue < new Date())
         const tempErrors = [];
 
-        if (name.length < 1) tempErrors.push('Name is required');
+        if (name.replace(/\s+/g, '').length < 1) tempErrors.push('Name is required');
         if (name.length > 50) tempErrors.push('Name must be less than 50 characters');
-        if (description.length < 1) tempErrors.push('Please add a brief description');
+        if (description.replace(/\s+/g, '').length < 1) tempErrors.push('Please add a brief description');
         if (description.length > 500) tempErrors.push('Description must be less than 500 characters');
         if (!due) tempErrors.push('Please add a due date');
         if (!(trueDue >= new Date())) tempErrors.push('Due date must be in the future');

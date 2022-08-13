@@ -1,7 +1,7 @@
 import AddProjectModal from '../AddProjectModal/';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import  { NavLink } from 'react-router-dom';
+import  { NavLink, useHistory } from 'react-router-dom';
 import {getProjects} from '../../store/projects';
 import './Sidebar.css'
 
@@ -11,7 +11,10 @@ function Sidebar({setMainContent}) {
     const projects = useSelector(state => state.projects);
     const userProjects = Object.values(projects).filter(project => project.user_id === currentUser.id);
     const dispatch = useDispatch();
+    const history = useHistory();
     useEffect(() => dispatch(getProjects()), [])
+
+    if (!currentUser) history.push('/')
 
     return userProjects  &&(
         <div id='sidebar'>
