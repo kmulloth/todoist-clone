@@ -21,7 +21,7 @@ function Today () {
             <ul id='all-tasks'>
             {userTasks.map(task => {
                 const trueDue = new Date(new Date(task?.due).setDate(new Date(task?.due).getDate() + 1));
-                return trueDue.getDate() === today.getDate() && <Task task={task} />
+                return trueDue.getDate() === today.getDate() && task.complete === false && <Task task={task} />
 
             })}
             </ul>

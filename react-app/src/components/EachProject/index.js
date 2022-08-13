@@ -15,6 +15,7 @@ import './EachProject.css'
 
 function Project() {
 
+    const currentUser = useSelector(state => state.session.user);
     const projects = useSelector(state => state.projects);
     const sections = useSelector(state => state.sections);
     const tasks = useSelector(state => state.tasks);
@@ -34,7 +35,7 @@ function Project() {
         dispatch(getSections())
     }, [dispatch]);
 
-    if (!project) {
+    if (project?.user_id !== currentUser.id) {
         return <NavLink to='/app/inbox' > Invalid URL Click here to return to inbox</NavLink>;
     }
     return (
