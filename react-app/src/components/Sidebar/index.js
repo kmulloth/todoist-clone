@@ -42,6 +42,22 @@ function Sidebar({setMainContent}) {
             <div id='archive'>
                 <NavLink to='/app/archive'>Archive</NavLink>
             </div>
+            <div id='dev-links'>
+                        <a
+					    	href="https://github.com/kmulloth"
+					    	target="_blank"
+					    	className="about-github"
+					    >
+					    	<i class="about-github fa-brands fa-github fa-xl"></i>
+					    </a>
+					    <a
+					    	href="https://www.linkedin.com/in/krishna-mulloth-461ab9230/"
+					    	target="_blank"
+					    	className="about-linkedin"
+					    >
+					    	<i class="fa-brands fa-linkedin fa-xl"></i>
+					    </a>
+                    </div>
         </div>
     )
 }

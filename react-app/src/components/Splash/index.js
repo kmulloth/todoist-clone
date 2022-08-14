@@ -27,6 +27,22 @@ function Splash(){
                     <NavLink className='splash-button' id='signup-action' to='/sign-up'exact={true}>Start for free</NavLink>
                     <button className='splash-button' onClick={handleDemo}>Demo</button>
                     <NavLink className='splash-button' id='login-action' to='/login' exact={true}>Login</NavLink>
+                    <div id='dev-links'>
+                        <a
+					    	href="https://github.com/kmulloth"
+					    	target="_blank"
+					    	className="about-github"
+					    >
+					    	<i class="about-github fa-brands fa-github fa-xl"></i>
+					    </a>
+					    <a
+					    	href="https://www.linkedin.com/in/krishna-mulloth-461ab9230/"
+					    	target="_blank"
+					    	className="about-linkedin"
+					    >
+					    	<i class="fa-brands fa-linkedin fa-xl"></i>
+					    </a>
+                    </div>
                 </div>
                 <div id='splash-image-container'>
                     <img src='https://www.usnews.com/object/image/00000142-9262-d33c-abc6-ff770ec60006/38205Checklist.jpg?update-time=1481554088624&size=responsive970' alt='background-img' />
