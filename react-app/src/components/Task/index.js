@@ -5,6 +5,7 @@ import { Modal } from '../../context/Modal';
 import TaskDisplay from './TaskDisplay';
 import EditTaskModal from "../EditTaskModal";
 import DeleteTaskModal from "../DeleteTaskModal";
+import './Task.css'
 
 function  Task ({task}) {
 
@@ -56,7 +57,7 @@ function  Task ({task}) {
             </div>
         </li>
         {showModal && (
-            <Modal onClose={() => setShowModal(false)}>
+            <Modal id='task-modal' onClose={() => setShowModal(false)}>
                 <TaskDisplay task={task} setShowModal={setShowModal}/>
             </Modal>
         )}

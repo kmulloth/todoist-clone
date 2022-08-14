@@ -1,0 +1,26 @@
+.task-display {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  height: 35vh;
+  padding:  0.5em 2em;
+  background-color: rgb(255, 255, 255, 1);
+  border-radius: 5px;
+}
+
+.task-display-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.task-title-container{
+    width: 80%;
+    text-overflow: ellipsis;
+}
+.task-display-header h1 {
+    width: 90%;
+    overflow: hidden;
+
+}

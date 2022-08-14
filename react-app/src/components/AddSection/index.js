@@ -25,7 +25,11 @@ function AddSection({projectId, setShowAddSection}) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Section Name" value={name} onChange={(e) => setName(e.target.value)} required />
+            <div className='form-group'>
+                <input type="text" placeholder="Section Name" value={name} onChange={(e) => setName(e.target.value)} required />
+                {name?.length < 1 && <p className='error'>Please enter a name</p>}
+                {name?.length > 40 && <p className='error'>Name must be less than 40 characters</p>}
+            </div>
             <div className="form-group">
                 <button id='cancel' className='btn btn-secondary' onClick={() => setShowAddSection(false)}>Cancel</button>
                 <button type="submit" disabled={name.replace(/\s+/g, '').length < 1}className={`btn btn-primary ${name.replace(/\s+/g, '').length < 1 ? 'disabled' : ''}`}>Add Section</button>
