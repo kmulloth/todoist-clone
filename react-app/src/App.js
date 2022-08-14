@@ -35,7 +35,7 @@ function App() {
   }
   return (
     <BrowserRouter>
-      <NavBar setShowSidebar={setShowSidebar} showSidebar={showSidebar}/>
+      {currentUser && <NavBar setShowSidebar={setShowSidebar} showSidebar={showSidebar}/>}
       <Switch>
         <Route path='/' exact={true}>
           <Splash />

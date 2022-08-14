@@ -1,0 +1,53 @@
+#splash-container {
+    height: 100vh;
+}
+#splash-content {
+    display: flex;
+    height: 100%;
+    background-color: rgb(245,245,247);
+}
+
+#splash-image-container {
+    width: 100%;
+    height: 100%;
+}
+
+#splash-image-container img {
+    width: 100%;
+    height: 100%;
+}
+
+#action-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+    background-color: rgb(245,245,247);
+    margin-top: 10em;
+    margin-left: 2em;
+}
+
+#action-panel p {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+}
+
+.splash-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    background-color: rgb(219,75,63);
+    transition: all 0.3s ease-in-out;
+    padding: 0.5em 1.5em;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.splash-button:hover {
+    background-color: rgb(219,75,63,0.8);
+    color: #fff;
+}

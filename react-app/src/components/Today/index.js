@@ -10,7 +10,7 @@ function Today () {
     const today = new Date();
     const currentUser = useSelector(state => state.session.user);
     const tasks = useSelector(state => state.tasks)
-    const userTasks = Object.values(tasks).filter(task => task.userId === currentUser.id);
+    const userTasks = Object.values(tasks).filter(task => task.userId === currentUser?.id);
     const dispatch = useDispatch()
 
     useEffect(() => dispatch(getTasks()), [])

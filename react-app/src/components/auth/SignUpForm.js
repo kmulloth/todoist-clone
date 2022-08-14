@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
 const SignUpForm = () => {
@@ -80,65 +80,71 @@ const SignUpForm = () => {
 
   return (
     <div className='signup_form_div'>
-      <form onSubmit={onSignUp} className='signup_form'>
-        { (errors.length > 0 && firstSubmit) && <div className='signup_form_errors'>
-          {errors.map((error, i) => (
-            <div key={i} className='signup_form_error'>{error}</div>
-          ))}
-        </div> }
-        <div className='signup_form_divs'>
-          <div className='sf_label'><label>Username</label></div>
-          <input
-            type='text'
-            name='username'
-            placeholder='Username'
-            onChange={updateUsername}
-            value={username}
-          ></input>
-        </div>
-        <div className='signup_form_divs'>
-          <div className='sf_label'><label>Email</label></div>
-          <input
-            type='text'
-            name='email'
-            placeholder='Email'
-            onChange={updateEmail}
-            value={email}
-          ></input>
-        </div>
-        {/* <div className='signup_form_divs'>
-          <div className='sf_label'><label>Profile Picture Url</label></div>
-          <input
-            type='text'
-            name='photoUrl'
-            placeholder='(Optional) Profile Photo URL'
-            onChange={updatePhotoUrl}
-            value={photoUrl}
-          ></input>
-        </div> */}
-        <div className='signup_form_divs'>
-          <div className='sf_label'><label>Password</label></div>
-          <input
-            type='password'
-            name='password'
-            placeholder='Password'
-            onChange={updatePassword}
-            value={password}
-          ></input>
-        </div>
-        <div className='signup_form_divs'>
-          <div className='sf_label'><label>Repeat Password</label></div>
-          <input
-            type='password'
-            name='repeat_password'
-            placeholder='Repeated Password'
-            onChange={updateRepeatPassword}
-            value={repeatPassword}
-            required={true}
-          ></input>
-        </div>
-        <button type='submit' className='signup_form_divs sf_submit'>Sign Up</button>
-      </form>
+      <div id='splash-content'>
+        <form onSubmit={onSignUp} className='signup_form'>
+          { (errors.length > 0 && firstSubmit) && <div className='signup_form_errors'>
+            {errors.map((error, i) => (
+              <div key={i} className='signup_form_error'>{error}</div>
+            ))}
+          </div> }
+          <div className='signup_form_divs'>
+            <div className='sf_label'><label>Username</label></div>
+            <input
+              type='text'
+              name='username'
+              placeholder='Username'
+              onChange={updateUsername}
+              value={username}
+            ></input>
+          </div>
+          <div className='signup_form_divs'>
+            <div className='sf_label'><label>Email</label></div>
+            <input
+              type='text'
+              name='email'
+              placeholder='Email'
+              onChange={updateEmail}
+              value={email}
+            ></input>
+          </div>
+          {/* <div className='signup_form_divs'>
+            <div className='sf_label'><label>Profile Picture Url</label></div>
+            <input
+              type='text'
+              name='photoUrl'
+              placeholder='(Optional) Profile Photo URL'
+              onChange={updatePhotoUrl}
+              value={photoUrl}
+            ></input>
+          </div> */}
+          <div className='signup_form_divs'>
+            <div className='sf_label'><label>Password</label></div>
+            <input
+              type='password'
+              name='password'
+              placeholder='Password'
+              onChange={updatePassword}
+              value={password}
+            ></input>
+          </div>
+          <div className='signup_form_divs'>
+            <div className='sf_label'><label>Repeat Password</label></div>
+            <input
+              type='password'
+              name='repeat_password'
+              placeholder='Repeated Password'
+              onChange={updateRepeatPassword}
+              value={repeatPassword}
+              required={true}
+            ></input>
+          </div>
+          <button type='submit' className='signup_form_divs sf_submit'>Sign Up</button>
+          <NavLink to='/' className='login_form_divs sf_cancel'>Cancel</NavLink>
+        </form>
+      <div id='splash-image-container'>
+        <img src='https://www.usnews.com/object/image/00000142-9262-d33c-abc6-ff770ec60006/38205Checklist.jpg?update-time=1481554088624&size=responsive970' alt='background-img' />
+      </div>
+      </div>
     </div>
   );
 };

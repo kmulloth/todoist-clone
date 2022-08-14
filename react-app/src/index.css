@@ -139,3 +139,18 @@ ul {
     margin: 0;
     cursor: pointer;
 }
+
+.signup_form, .login_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+    padding: 1rem;
+    margin-top: 10em;
+}
+
+.signup_form_div, .login_form_div {
+    height: 100%
+}

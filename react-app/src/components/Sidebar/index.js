@@ -9,7 +9,7 @@ function Sidebar({setMainContent}) {
 
     const currentUser = useSelector(state => state.session.user);
     const projects = useSelector(state => state.projects);
-    const userProjects = Object.values(projects).filter(project => project.user_id === currentUser.id);
+    const userProjects = Object.values(projects).filter(project => project.user_id === currentUser?.id);
     const dispatch = useDispatch();
     const history = useHistory();
     useEffect(() => dispatch(getProjects()), [])
