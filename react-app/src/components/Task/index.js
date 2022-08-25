@@ -45,7 +45,10 @@ function  Task ({task}) {
         <>
         <li className="inbox-task" >
             <div className="inbox-task-title" >
-                <input className='checkbox' type="checkbox"checked={task.complete} value={task.complete} id={task.id} onChange={handleComplete} />
+                <label className='checkbox-label'>
+                    <input className='checkbox' type="checkbox"checked={task.complete} value={task.complete} id={task.id} onChange={handleComplete} />
+                    <span className={`checkbox-custom priority${task.priority}`} />
+                </label>
                 <div className="inbox-task-header" onClick={() => setShowModal(true)}>
                     <h4>{task.name}</h4>
                     <p>{new Date(new Date(task.due).setDate(new Date(task.due).getDate() + 1)).toLocaleDateString()}</p>
