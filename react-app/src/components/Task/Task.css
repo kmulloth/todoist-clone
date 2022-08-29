@@ -57,6 +57,36 @@
     -o-transition: all 0.3s ease-out;
 }
 
+.checkbox:checked ~ .checkbox-custom {
+    -webkit-transform: rotate(0deg) scale(1);
+    -ms-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+}
+
+
+.checkbox-label .checkbox-custom::after {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    -webkit-transform: rotate(0deg) scale(0);
+    -ms-transform: rotate(0deg) scale(0);
+    transform: rotate(0deg) scale(0);
+    transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+}
+
+
+.checkbox:checked ~ .checkbox-custom::after {
+  -webkit-transform: rotate(45deg) scale(1);
+  -ms-transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1);
+  left: 8px;
+  top: 3px;
+}
+
 .priority0 {
     border: 2px solid #666;
     background-color: rgb(200, 200, 200, 0.5);
