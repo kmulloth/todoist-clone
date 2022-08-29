@@ -36,9 +36,11 @@ function  Task ({task}) {
             priority: oldTask.priority,
             user_id: currentUser.id
         }
-        dispatch(editTask(newTask)).then(() => {
-            dispatch(getTasks())
-        }).catch(err => console.log(err))
+        setTimeout(() => {
+            dispatch(editTask(newTask)).then(() => {
+                dispatch(getTasks())
+            }).catch(err => console.log(err))
+        }, 300);
     }
 
     return (

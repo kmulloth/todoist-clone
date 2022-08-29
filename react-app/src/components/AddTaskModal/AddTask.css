@@ -1,17 +1,88 @@
-#project-select {
-  width: 100%;
-  position: relative;
+#add-task-form {
+  width:40vw;
 }
 
-#project-selct select {
-    
+#add-task-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#date-project {
+  display: flex;
+  align-items: center;
+}
+
+#project-show{
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+#project-select {
+  position: absolute;
+  background-color: white;
+  padding: 0.5em 1em;
+  height: 10em;
+  overflow: scroll;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+}
+
+/* #project-select li {
+  padding: 0;
+} */
+
+#priority-select {
+  display: flex;
+  justify-content: space-between;
+  width: 18%;
 }
 
 .project-ddli {
-    font-size: 1.2em;
-    font-weight: bold;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
-.section-ddli {
+.project-ddli > p {
+  margin: 0;
+}
+
+#section-ddli {
     font-size: 0.8em;
+    padding-left: 33px;
+    cursor: pointer;
+}
+
+#low {
+  color: blue;
+}
+
+#med{
+  color: orange;
+}
+
+#high{
+  color: red;
+}
+
+.submit{
+  color: white;
+  background-color: red;
+}
+
+.submit-disabled {
+  background-color: pink;
+  color: white;
+}
+
+.submit-disabled:hover {
+  background-color: pink;
+}
+
+#add-task-buttons {
+  display: flex;
+  justify-content: flex-start
 }
