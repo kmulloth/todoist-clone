@@ -6,6 +6,7 @@ import { getProjects } from "../../store/projects";
 import { getSections } from "../../store/sections";
 import DeleteProjectModal from "../DeleteProjectModal";
 import EditProjectModal from "../EditProjectModal";
+import AddTask from '../AddTaskModal/AddTask'
 import EditTaskModal from "../EditTaskModal";
 import DeleteTaskModal from "../DeleteTaskModal";
 import DeleteSectionModal from "../DeleteSectionModal";
@@ -28,6 +29,7 @@ function Project() {
     console.log('Sections: ', projectSections, 'Tasks: ', projectTasks);
 
     const [showAddSection, setShowAddSection] = useState(false);
+    const [showAddTask, setShowAddTask] = useState(false);
 
     useEffect(() => {
         dispatch(getTasks())

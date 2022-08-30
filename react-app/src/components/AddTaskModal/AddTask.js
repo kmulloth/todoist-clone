@@ -15,6 +15,7 @@ function AddTask({setShowModal}) {
     const [sectionId, setSectionId] = useState()
 
     const [showProjects, setShowProjects] = useState(false)
+    const [projectName, setProjectName] = useState('Inbox')
 
     const currentUser = useSelector(state => state.session.user)
     const projects = useSelector(state => state.projects)
@@ -30,6 +31,12 @@ function AddTask({setShowModal}) {
             return {id: project.id, name: project.name, color: project.color, sections: sectionsArr}
         }
     })
+
+    useEffect(() => {
+        console.log(projectId, sectionId)
+        const selectedProject = userProjects.find(project => project.id == projectId)
+        console.log(userProjects, selectedProject)
+    }, [projectId, sectionId])
 
     useEffect(() => {
         console.log(new Date(due), '!!!' ,new  Date(), trueDue < new Date())
@@ -95,8 +102,7 @@ function AddTask({setShowModal}) {
                         <div
                             className='form-control'
                             id='project'
-                            value={[projectId, sectionId]}
-                            onClick={(e) => setShowProjects(!showProjects)}>{projects[projectId] ? projects[projectId].name : 'Inbox'}
+                            onClick={(e) => setShowProjects(!showProjects)}>{userProjects.find(project => project.id == projectId) ? userProjects.find(project => project.id == projectId).name : 'Inbox'}
                         </div>
                         {showProjects && <ul id='project-select'>
                             <li value='null,null' onClick={e => {
@@ -106,8 +112,9 @@ function AddTask({setShowModal}) {
                             }}>Inbox</li>
                             {userProjects.map(project => project && (
                                 <>
-                                <li className='project-ddli' key={project?.id} value={project?.id} onClick={e => {
-                                setProjectId(e.target.value)
+                                <li className='project-ddli' key={project.id} value={project?.id} onClick={e => {
+                                // console.log(e.target.value, project.id)
+                                setProjectId(project.id)
                                 setSectionId(null)
                                 setShowProjects(false)
                             }}>
@@ -115,9 +122,9 @@ function AddTask({setShowModal}) {
                                 <p>{project?.name.toUpperCase()}</p>
                             </li>
                                 {project.sections.length > 0 && project.sections.map(section => (
-                                    <li cid='section-ddli' value={section?.id} onClick={e => {
-                                        setProjectId(sections[e.target.value].project_id)
-                                        setSectionId(e.target.value)
+                                    <li cid='section-ddli' value={section.id} onClick={e => {
+                                        setProjectId(project.id)
+                                        setSectionId(section.id)
                                         setShowProjects(false)
                                     }}>{`\t ${section.name.toLowerCase()}`}</li>
                                 ))}
