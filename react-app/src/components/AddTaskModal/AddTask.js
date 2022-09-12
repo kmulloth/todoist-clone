@@ -4,15 +4,15 @@ import { useHistory } from 'react-router-dom';
 import { createTask, getTasks } from '../../store/tasks'
 import './AddTask.css'
 
-function AddTask({setShowModal}) {
+function AddTask({setShowModal, setShowAddTask, project_id, section_id, }) {
 
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [due, setDue] = useState('')
     const [priority, setPriority] = useState(0)
-    const [projectId, setProjectId] = useState()
-    const [sectionId, setSectionId] = useState()
+    const [projectId, setProjectId] = useState(project_id)
+    const [sectionId, setSectionId] = useState(section_id)
 
     const [showProjects, setShowProjects] = useState(false)
 
@@ -67,7 +67,7 @@ function AddTask({setShowModal}) {
             userId: currentUser.id
         }
         dispatch(createTask(task)).then(() => {
-            setShowModal(false)
+            setShowModal ? setShowModal(false) : setShowAddTask(false)
             history.push(projectId ? `/app/projects/${projectId}` : '/app/inbox')
             dispatch(getTasks())
         })
@@ -95,8 +95,7 @@ function AddTask({setShowModal}) {
                         <div
                             className='form-control'
                             id='project'
-                            value={[projectId, sectionId]}
-                            onClick={(e) => setShowProjects(!showProjects)}>{projects[projectId] ? projects[projectId].name : 'Inbox'}
+                            onClick={(e) => setShowProjects(!showProjects)}>{userProjects.find(project => project.id == projectId) ? userProjects.find(project => project.id == projectId).name : 'Inbox'}
                         </div>
                         {showProjects && <ul id='project-select'>
                             <li value='null,null' onClick={e => {
@@ -106,20 +105,21 @@ function AddTask({setShowModal}) {
                             }}>Inbox</li>
                             {userProjects.map(project => project && (
                                 <>
-                                <li className='project-ddli' key={project?.id} value={project?.id} onClick={e => {
-                                setProjectId(e.target.value)
+                                <li className='project-ddli' key={project.id} value={project?.id} onClick={e => {
+                                // console.log(e.target.value, project.id)
+                                setProjectId(project.id)
                                 setSectionId(null)
                                 setShowProjects(false)
                             }}>
                                 <span className='bubble' style={{color: project.color}}>&bull;</span>
-                                <p>{project?.name.toUpperCase()}</p>
+                                <p>{project?.name}</p>
                             </li>
                                 {project.sections.length > 0 && project.sections.map(section => (
-                                    <li cid='section-ddli' value={section?.id} onClick={e => {
-                                        setProjectId(sections[e.target.value].project_id)
-                                        setSectionId(e.target.value)
+                                    <li cid='section-ddli' value={section.id} onClick={e => {
+                                        setProjectId(project.id)
+                                        setSectionId(section.id)
                                         setShowProjects(false)
-                                    }}>{`\t ${section.name.toLowerCase()}`}</li>
+                                    }}>{`\t ${section.name}`}</li>
                                 ))}
                                 </>
                             ))}
@@ -134,7 +134,7 @@ function AddTask({setShowModal}) {
                 </div>
             </div>
             <div id='add-task-buttons'>
-                <button onClick={e => setShowModal(false)} className='cancel-btn'>Cancel</button>
+                <button onClick={setShowModal ? e => setShowModal(false) : e => setShowAddTask(false)} className='cancel-btn'>Cancel</button>
                 <button disabled={errors.length > 0} type='submit' className={`submit${errors.length > 0 ? '-disabled' : ''}`}>Submit</button>
             </div>
         </form>

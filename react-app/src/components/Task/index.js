@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTasks, editTask } from "../../store/tasks";
 import { Modal } from '../../context/Modal';
 import TaskDisplay from './TaskDisplay';
-import EditTaskModal from "../EditTaskModal";
+import EditTask from "../EditTaskModal/EditTask";
 import DeleteTaskModal from "../DeleteTaskModal";
 import './Task.css'
 
@@ -13,6 +13,7 @@ function  Task ({task}) {
     const dueDate = new Date(new Date(task.due).setDate(new Date(task.due).getDate() + 1));
 
     const [showModal, setShowModal] = useState(false);
+    const [showEditTask, setShowEditTask] = useState(false);
 
     // console.log(today, dueDate, overdue)
 
@@ -45,7 +46,7 @@ function  Task ({task}) {
 
     return (
         <>
-        <li className="inbox-task" >
+        {!showEditTask && <li className="inbox-task" >
             <div className="inbox-task-title" >
                 <label className='checkbox-label'>
                     <input className='checkbox' type="checkbox"checked={task.complete} value={task.complete} id={task.id} onChange={handleComplete} />
@@ -53,14 +54,17 @@ function  Task ({task}) {
                 </label>
                 <div className="inbox-task-header" onClick={() => setShowModal(true)}>
                     <h4>{task.name}</h4>
-                    <p>{new Date(new Date(task.due).setDate(new Date(task.due).getDate() + 1)).toLocaleDateString()}</p>
+                    {task.due && <p>{new Date(new Date(task.due).setDate(new Date(task.due).getDate() + 1)).toLocaleDateString()}</p>}
                 </div>
             </div>
             <div className="inbox-task-buttons">
-                <EditTaskModal task={task} />
+            <i className="fas fa-edit fa-lg" onClick={e => setShowEditTask(!showEditTask)}/>
                 <DeleteTaskModal task={task} />
             </div>
-        </li>
+        </li>}
+        {showEditTask && (
+            <EditTask task={task} setShowEditTask={setShowEditTask}/>
+        )}
         {showModal && (
             <Modal id='task-modal' onClose={() => setShowModal(false)}>
                 <TaskDisplay task={task} setShowModal={setShowModal}/>

@@ -1,3 +1,16 @@
+#sidebar-open {
+    width: 280px;
+    height: 100%;
+    background-color: #fafafa;
+    transition: all 0.3s;
+}
+
+#sidebar-close {
+    width: 0;
+    height: 100%;
+    transition: all 0.3s;
+}
+
 #projects {
     padding: 0 0 0 40px;
     height: 80%;
@@ -19,13 +32,13 @@
     border-top: 1px solid #ddd;
 }
 
-#side-menu {
+/* #side-menu {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-evenly;
     height: 5%;
-}
+} */
 
 .project-item {
     display: flex;
