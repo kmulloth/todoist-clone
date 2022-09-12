@@ -4,18 +4,17 @@ import { useHistory } from 'react-router-dom';
 import { createTask, getTasks } from '../../store/tasks'
 import './AddTask.css'
 
-function AddTask({setShowModal}) {
+function AddTask({setShowModal, setShowAddTask, project_id, section_id, }) {
 
     const [errors, setErrors] = useState([]);
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [due, setDue] = useState('')
     const [priority, setPriority] = useState(0)
-    const [projectId, setProjectId] = useState()
-    const [sectionId, setSectionId] = useState()
+    const [projectId, setProjectId] = useState(project_id)
+    const [sectionId, setSectionId] = useState(section_id)
 
     const [showProjects, setShowProjects] = useState(false)
-    const [projectName, setProjectName] = useState('Inbox')
 
     const currentUser = useSelector(state => state.session.user)
     const projects = useSelector(state => state.projects)
@@ -31,12 +30,6 @@ function AddTask({setShowModal}) {
             return {id: project.id, name: project.name, color: project.color, sections: sectionsArr}
         }
     })
-
-    useEffect(() => {
-        console.log(projectId, sectionId)
-        const selectedProject = userProjects.find(project => project.id == projectId)
-        console.log(userProjects, selectedProject)
-    }, [projectId, sectionId])
 
     useEffect(() => {
         console.log(new Date(due), '!!!' ,new  Date(), trueDue < new Date())
@@ -74,7 +67,7 @@ function AddTask({setShowModal}) {
             userId: currentUser.id
         }
         dispatch(createTask(task)).then(() => {
-            setShowModal(false)
+            setShowModal ? setShowModal(false) : setShowAddTask(false)
             history.push(projectId ? `/app/projects/${projectId}` : '/app/inbox')
             dispatch(getTasks())
         })
@@ -119,14 +112,14 @@ function AddTask({setShowModal}) {
                                 setShowProjects(false)
                             }}>
                                 <span className='bubble' style={{color: project.color}}>&bull;</span>
-                                <p>{project?.name.toUpperCase()}</p>
+                                <p>{project?.name}</p>
                             </li>
                                 {project.sections.length > 0 && project.sections.map(section => (
                                     <li cid='section-ddli' value={section.id} onClick={e => {
                                         setProjectId(project.id)
                                         setSectionId(section.id)
                                         setShowProjects(false)
-                                    }}>{`\t ${section.name.toLowerCase()}`}</li>
+                                    }}>{`\t ${section.name}`}</li>
                                 ))}
                                 </>
                             ))}
@@ -141,7 +134,7 @@ function AddTask({setShowModal}) {
                 </div>
             </div>
             <div id='add-task-buttons'>
-                <button onClick={e => setShowModal(false)} className='cancel-btn'>Cancel</button>
+                <button onClick={setShowModal ? e => setShowModal(false) : e => setShowAddTask(false)} className='cancel-btn'>Cancel</button>
                 <button disabled={errors.length > 0} type='submit' className={`submit${errors.length > 0 ? '-disabled' : ''}`}>Submit</button>
             </div>
         </form>

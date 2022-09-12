@@ -55,6 +55,8 @@ function Project() {
                         return <Task task={task} />
                     }
                 })}
+                {showAddTask != 'none' && <button onClick={() => setShowAddTask('none')}>Add Task</button>}
+                {showAddTask == 'none' && <AddTask project_id={project.id} setShowAddTask={setShowAddTask} />}
             </div>
             <div className='section-form'>
                 {!showAddSection && <button className='add-section-buttons' onClick={() => setShowAddSection(true)}>Add Section</button>}
@@ -73,6 +75,8 @@ function Project() {
                                 return <Task task={task} />
                             }
                         })}
+                        {showAddTask != section.id && <button onClick={() => setShowAddTask(section.id)}>Add Task</button>}
+                        {showAddTask == section.id && <AddTask project_id={project.id} section_id={section.id} setShowAddTask={setShowAddTask} />}
                         </div>
                     </div>
                 ))}

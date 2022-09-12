@@ -54,7 +54,7 @@ function  Task ({task}) {
                 </label>
                 <div className="inbox-task-header" onClick={() => setShowModal(true)}>
                     <h4>{task.name}</h4>
-                    <p>{new Date(new Date(task.due).setDate(new Date(task.due).getDate() + 1)).toLocaleDateString()}</p>
+                    {task.due && <p>{new Date(new Date(task.due).setDate(new Date(task.due).getDate() + 1)).toLocaleDateString()}</p>}
                 </div>
             </div>
             <div className="inbox-task-buttons">

@@ -54,7 +54,7 @@ function App() {
         </ProtectedRoute>
         <div id='main'>
         <Route path='/app' >
-            {showSidebar  && <Sidebar setMainContent={setMainContent}/>}
+            <Sidebar setMainContent={setMainContent} showSidebar={showSidebar}/>
         </Route>
         <Route path='/app/projects/:projectId'>
             <Project />

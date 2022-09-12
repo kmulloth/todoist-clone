@@ -103,7 +103,7 @@ function EditTask({task, setShowEditTask}) {
                 className='form-control' id='description'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                required
+                // required
                 />
             </div>
             <div id='add-task-options'>
@@ -127,19 +127,19 @@ function EditTask({task, setShowEditTask}) {
                             {userProjects.map(project => project && (
                                 <>
                                 <li className='project-ddli' key={project?.id} value={project?.id} onClick={e => {
-                                setProjectId(e.target.value)
+                                setProjectId(project.id)
                                 setSectionId(null)
                                 setShowProjects(false)
                             }}>
                                 <span className='bubble' style={{color: project.color}}>&bull;</span>
-                                <p>{project?.name.toUpperCase()}</p>
+                                <p>{project?.name}</p>
                             </li>
                                 {project.sections.length > 0 && project.sections.map(section => (
                                     <li cid='section-ddli' value={section?.id} onClick={e => {
-                                        setProjectId(sections[e.target.value].project_id)
-                                        setSectionId(e.target.value)
+                                        setProjectId(project.id)
+                                        setSectionId(section.id)
                                         setShowProjects(false)
-                                    }}>{`\t ${section.name.toLowerCase()}`}</li>
+                                    }}>{`\t ${section.name}`}</li>
                                 ))}
                                 </>
                             ))}

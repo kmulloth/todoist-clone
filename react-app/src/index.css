@@ -47,6 +47,10 @@ button {
     margin: 0.5rem;
 }
 
+.fa-edit, .fa-trash {
+    color: #666
+}
+
 button:hover {
     background-color: #e6e6e6;
 }
@@ -73,13 +77,6 @@ a:hover{
     height: 97vh;
 }
 
-#sidebar {
-    width: 280px;
-    height: 100%;
-    background-color: #fafafa;
-    transition: all 0.1s;
-}
-
 body {
     margin: 0;
     padding: 0;
@@ -97,9 +94,10 @@ ul {
     display: flex;
     text-decoration: none;
     justify-content: space-between;
+    align-items: center;
     margin: 0;
     padding: 1rem 2rem;
-    height: 3vh;
+    height: 1.5vh;
     background-color: rgb(219,75,63);
 }
 
