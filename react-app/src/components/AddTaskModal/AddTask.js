@@ -95,7 +95,7 @@ function AddTask({setShowModal, setShowAddTask, project_id, section_id, }) {
                         <div
                             className='form-control'
                             id='project'
-                            onClick={(e) => setShowProjects(!showProjects)}>{userProjects.find(project => project.id == projectId) ? userProjects.find(project => project.id == projectId).name : 'Inbox'}
+                            onClick={(e) => setShowProjects(!showProjects)}>{userProjects.find(project => project?.id == projectId) ? userProjects.find(project => project?.id == projectId).name : 'Inbox'}
                         </div>
                         {showProjects && <ul id='project-select'>
                             <li value='null,null' onClick={e => {
